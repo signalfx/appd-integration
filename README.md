@@ -2,37 +2,39 @@ Agent tool for submitting AppDynamics metrics to SignalFx.
 
 ## Configurations
 
-### config.properties
+### Set environment variables
 
 ```
-appd.username=<AppDynamics Username>
-appd.password=<AppDynamics Password>
-appd.host=<https://AppDynamics Host>
-signalfx.token=<SignalFx token>
-interval=<Sync interval in minutes>
+APPD_USERNAME=<AppDynamics Username>
+APPD_PASSWORD=<AppDynamics Password>
+APPD_HOST=<https://AppDynamics Host>
+SIGNALFX_TOKEN=<SignalFx token>
 ```
 
 ### metrics.json
 
 ```
-[
-    {
-        "name": "App Name"
-        "metrics": [
-            {
-                "metric_path": "Metric Path for AppDynamics"
-            },
-            {
-                "metric_path: "Another Metric Path for AppDynamics"
-                "metric_name": "Optional SignalFX Metric Name, default to metric_path is empty"
-                "dimensions": {
-                    "key": "value",
-                    "key2": "value2"
-                }
-            }
-        ]
-    }
-]
+{
+    "interval": <Sync interval in minutes>,
+    "apps":[
+               {
+                   "name": "App Name"
+                   "metrics": [
+                       {
+                           "metric_path": "Metric Path for AppDynamics"
+                       },
+                       {
+                           "metric_path: "Another Metric Path for AppDynamics"
+                           "metric_name": "Optional SignalFX Metric Name, default to metric_path is empty"
+                           "dimensions": {
+                               "key": "value",
+                               "key2": "value2"
+                           }
+                       }
+                   ]
+               }
+           ]
+}
 ```
 
 metric_name and dimensions are optional.

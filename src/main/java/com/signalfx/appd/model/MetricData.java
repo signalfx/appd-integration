@@ -3,6 +3,9 @@ package com.signalfx.appd.model;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * MetricData represents each Metric data from AppDynamics query.
+ */
 public class MetricData {
 
     public final String frequency;

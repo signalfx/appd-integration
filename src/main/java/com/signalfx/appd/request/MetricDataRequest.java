@@ -49,9 +49,9 @@ public class MetricDataRequest {
     public List<MetricData> get() throws RequestException {
         HttpResponse<JsonNode> response;
         try {
-            response = Unirest.get(this.connectionConfig.adURL + "/controller/rest/applications/" + appName + "/metric-data")
+            response = Unirest.get(this.connectionConfig.appdURL + "/controller/rest/applications/" + appName + "/metric-data")
                     .header("accept", "application/json")
-                    .basicAuth(this.connectionConfig.adUsername, this.connectionConfig.adPassword)
+                    .basicAuth(this.connectionConfig.appdUsername, this.connectionConfig.appdPassword)
                     .queryString(getQueryString())
                     .queryString("output", "json")
                     .asJson();

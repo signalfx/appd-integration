@@ -6,5 +6,4 @@
 target
 
 #config
-config.properties
 metrics.json

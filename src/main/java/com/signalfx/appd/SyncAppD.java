@@ -11,6 +11,9 @@ import com.signalfx.appd.info.MetricInfo;
 import com.signalfx.appd.model.MetricData;
 import com.signalfx.appd.request.MetricDataRequest;
 
+/**
+ * SyncAppD performs syncing of AppDynamics metrics to SignalFx
+ */
 public class SyncAppD {
 
     protected static final Logger log = LoggerFactory.getLogger(SyncAppD.class);
@@ -25,12 +28,16 @@ public class SyncAppD {
         this.reportMetric = new ReportMetric(connectionConfig);
     }
 
-    public void perform(long duration) {
+    /**
+     * Perform syncing of AppDynamics metrics to SignalFx
+     * @param range number of minute to query back from current time.
+     */
+    public void perform(long range) {
         for (AppInfo app : apps) {
             dataRequest.setAppName(app.name);
             for (MetricInfo metric : app.metrics) {
                 dataRequest.setTimeParams(
-                        MetricDataRequest.TimeParams.beforeNow(duration));
+                        MetricDataRequest.TimeParams.beforeNow(range));
                 dataRequest.setMetricPath(metric.metricPath);
 
                 try {

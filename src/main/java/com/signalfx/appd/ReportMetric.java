@@ -23,6 +23,9 @@ import com.signalfx.metrics.errorhandler.OnSendErrorHandler;
 import com.signalfx.metrics.flush.AggregateMetricSender;
 import com.signalfx.metrics.protobuf.SignalFxProtocolBuffers;
 
+/**
+ * ReportMetric handles reporting metrics to SignalFx
+ */
 public class ReportMetric {
 
     protected static final Logger log = LoggerFactory.getLogger(ReportMetric.class);
