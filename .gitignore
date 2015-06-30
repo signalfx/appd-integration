@@ -4,3 +4,7 @@
 
 # Maven build directory/artifacts
 target
+
+#config
+config.properties
+metrics.json
