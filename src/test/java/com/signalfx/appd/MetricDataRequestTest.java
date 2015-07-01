@@ -3,9 +3,6 @@ package com.signalfx.appd;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,6 +17,7 @@ import org.eclipse.jetty.server.handler.AbstractHandler;
 import org.junit.Test;
 
 import com.signalfx.appd.model.MetricData;
+import com.signalfx.appd.model.MetricValue;
 import com.signalfx.appd.request.MetricDataRequest;
 import com.signalfx.appd.config.ConnectionConfig;
 
@@ -41,9 +39,14 @@ public class MetricDataRequestTest {
         server.stop();
 
         assertEquals(1, metricDataList.size());
+
         MetricData metricData = metricDataList.get(0);
         assertEquals("End User Experience|Device|Computer|AJAX Requests per Minute", metricData.metricPath);
         assertEquals(4, metricData.metricValues.size());
+
+        MetricValue metricValue = metricData.metricValues.get(0);
+        assertEquals(1435686360000L, metricValue.startTimeInMillis);
+        assertEquals(57L, metricValue.value);
     }
 
     private class AppDTestHandler extends AbstractHandler {
