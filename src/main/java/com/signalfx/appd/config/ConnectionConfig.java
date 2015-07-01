@@ -13,7 +13,7 @@ public class ConnectionConfig {
     public final String appdURL;
     public final String fxToken;
 
-    private ConnectionConfig(String appdUsername, String appdPassword, String appdURL, String fxToken) {
+    public ConnectionConfig(String appdUsername, String appdPassword, String appdURL, String fxToken) {
         this.appdUsername = appdUsername;
         this.appdPassword = appdPassword;
         this.appdURL = appdURL;

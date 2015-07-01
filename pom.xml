@@ -10,6 +10,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.signalfx.public</groupId>
+            <artifactId>signalfx-codahale</artifactId>
+            <version>0.0.20</version>
+        </dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.5</version>
@@ -18,7 +23,7 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.5</version>
-            <scope>test</scope>
+            <!--<scope>test</scope>-->
         </dependency>
         <dependency>
             <groupId>com.mashape.unirest</groupId>
@@ -26,9 +31,16 @@
             <version>1.4.5</version>
         </dependency>
         <dependency>
-            <groupId>com.signalfx.public</groupId>
-            <artifactId>signalfx-codahale</artifactId>
-            <version>0.0.20</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>8.1.14.v20131031</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
