@@ -39,7 +39,7 @@ public class AppD {
             return;
         }
 
-        log.info("Starting AppDynamics sync of {} metric(s) at {} minute(s) interval",
+        log.info("Starting AppDynamics sync of {} rule(s) at {} minute(s) interval",
                 metricCount, syncConfig.interval);
 
         int intervalMillis = syncConfig.interval * MINUTE_MILLIS;

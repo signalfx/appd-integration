@@ -35,26 +35,35 @@ public class SyncAppD {
     public void perform(long range) {
         for (AppInfo app : apps) {
             dataRequest.setAppName(app.name);
-            for (MetricInfo metric : app.metrics) {
+            for (MetricInfo metricInfo : app.metrics) {
                 dataRequest.setTimeParams(
                         MetricDataRequest.TimeParams.beforeNow(range));
-                dataRequest.setMetricPath(metric.metricPath);
+                dataRequest.setMetricPath(metricInfo.metricPath);
+
+                // If query contains *, we could be getting more than one result so we are using
+                // the actual path from the result instead of the configurations metric name.
+                boolean useActualPath = metricInfo.metricPath.contains("*");
 
                 try {
                     List<MetricData> metricDataList = dataRequest.get();
+
                     if (metricDataList.size() > 0) {
-                        if (metricDataList.size() > 1) {
-                            // too many metrics found, we will just use the first one.
-                            log.warn("{} metric paths found, only the first one is used.", metricDataList.size());
+                        for (MetricData metricData : metricDataList) {
+                            if (!metricData.metricValues.isEmpty()) {
+                                reportMetric.report(metricData.metricValues,
+                                        useActualPath ?
+                                                metricData.metricPath :
+                                                metricInfo.metricName,
+                                        metricInfo.dimensions);
+                            }
                         }
-                        reportMetric.report(metricDataList.get(0), metric);
                     } else {
                         // no metrics found, something is wrong with selection
-                        log.error("No metric path found for metric path selection \"{}\"", metric.metricPath);
+                        log.warn("No metric found for query \"{}\"", metricInfo.metricPath);
                     }
                 } catch (RequestException e) {
                     // too bad
-                    log.warn("Metric report failure for \"{}\"", metric.metricPath);
+                    log.warn("Metric report failure for \"{}\"", metricInfo.metricPath);
                 }
             }
         }

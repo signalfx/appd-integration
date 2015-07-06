@@ -70,6 +70,9 @@ public class SyncConfig {
                     } else {
                         dimensions = null;
                     }
+                    if (metricPath.contains("*") && metricName != null) {
+                        log.warn("Found metric path \"{}\" with * and metric name \"{}\". Metric name will be ignored.", metricPath, metricName);
+                    }
                     appInfo.metrics.add(new MetricInfo(metricPath, metricName, dimensions));
                 }
             }

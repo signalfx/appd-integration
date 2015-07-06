@@ -10,8 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.signalfx.appd.config.ConnectionConfig;
-import com.signalfx.appd.info.MetricInfo;
-import com.signalfx.appd.model.MetricData;
 import com.signalfx.appd.model.MetricValue;
 
 import com.signalfx.endpoint.SignalFxEndpoint;
@@ -30,7 +28,8 @@ public class ReportMetric {
 
     protected static final Logger log = LoggerFactory.getLogger(ReportMetric.class);
 
-    private final Map<MetricInfo, Long> metricToLastTimestampMap = new HashMap<>();
+    // A map of <Metric, Dimension> to last timestamp sent.
+    private final Map<String, Map<Map<String, String>, Long>> metricToLastTimestampMap = new HashMap<>();
 
     private final ConnectionConfig connectionConfig;
 
@@ -45,7 +44,7 @@ public class ReportMetric {
         this.onSendErrorHandlers.add(countingOnSendErrorHandler);
     }
 
-    public void report(MetricData data, MetricInfo info) throws RequestException {
+    public void report(List<MetricValue> values, String metricName, Map<String, String> dimensions) throws RequestException {
         SignalFxReceiverEndpoint dataPointEndpoint = new SignalFxEndpoint();
         AggregateMetricSender mf =
                 new AggregateMetricSender("appd-integration",
@@ -57,18 +56,17 @@ public class ReportMetric {
         try (AggregateMetricSender.Session i = mf.createSession()) {
             SignalFxProtocolBuffers.DataPoint.Builder dataPointBuilder = SignalFxProtocolBuffers.DataPoint
                     .newBuilder()
-                    .setMetric(info.metricName);
-            if (info.dimensions != null) {
-                for (Map.Entry<String, String> entry : info.dimensions.entrySet()) {
+                    .setMetric(metricName);
+            if (dimensions != null) {
+                for (Map.Entry<String, String> entry : dimensions.entrySet()) {
                     dataPointBuilder.addDimensions(SignalFxProtocolBuffers.Dimension.newBuilder()
                             .setKey(entry.getKey())
                             .setValue(entry.getValue()));
                 }
             }
-
-            long lastTimestamp = metricToLastTimestampMap.containsKey(info) ? metricToLastTimestampMap.get(info) : 0;
+            long lastTimestamp = getLastTimestamp(metricName, dimensions);
             long latestTimestamp = lastTimestamp;
-            for (MetricValue value : data.metricValues) {
+            for (MetricValue value : values) {
                 if (value.startTimeInMillis > lastTimestamp) {
                     i.setDatapoint(
                             dataPointBuilder
@@ -81,12 +79,33 @@ public class ReportMetric {
                 }
             }
             if (latestTimestamp > lastTimestamp) {
-                metricToLastTimestampMap.put(info, latestTimestamp);
+                putLastTimestamp(metricName, dimensions, latestTimestamp);
             }
         } catch (IOException e) {
                 log.error("Metric \"{}\" send failure (count {}).",
-                        data.metricValues.size(), data.metricPath);
+                        values.size(), metricName);
                 throw new RequestException("There was something wrong with sending request", e);
         }
+    }
+
+    private long getLastTimestamp(String metricName, Map<String, String> dimensions) {
+        Map<Map<String, String>, Long> dimensionsToTimestamp = metricToLastTimestampMap.get(metricName);
+        if (dimensionsToTimestamp == null) {
+            return 0;
+        }
+        Long timestamp = dimensionsToTimestamp.get(dimensions);
+        if (timestamp == null) {
+            return 0;
+        }
+        return timestamp;
+    }
+
+    private void putLastTimestamp(String metricName, Map<String, String> dimensions, long timestamp) {
+        Map<Map<String, String>, Long> dimensionsToTimestamp = metricToLastTimestampMap.get(metricName);
+        if (dimensionsToTimestamp == null) {
+            dimensionsToTimestamp = new HashMap<>();
+            metricToLastTimestampMap.put(metricName, dimensionsToTimestamp);
+        }
+        dimensionsToTimestamp.put(dimensions, timestamp);
     }
 }
