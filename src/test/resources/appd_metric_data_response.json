@@ -1,0 +1,56 @@
+[{
+  "frequency": "ONE_MIN",
+  "metricId": 269912,
+  "metricName": "EUM|Device|Computer|AJAX Requests per Minute",
+  "metricPath": "End User Experience|Device|Computer|AJAX Requests per Minute",
+  "metricValues":   [
+    {
+      "count": 1,
+      "current": 0,
+      "max": 57,
+      "min": 57,
+      "occurrences": 0,
+      "standardDeviation": 0,
+      "startTimeInMillis": 1435686360000,
+      "sum": 57,
+      "useRange": true,
+      "value": 57
+    },
+    {
+      "count": 1,
+      "current": 0,
+      "max": 91,
+      "min": 91,
+      "occurrences": 0,
+      "standardDeviation": 0,
+      "startTimeInMillis": 1435686420000,
+      "sum": 91,
+      "useRange": true,
+      "value": 91
+    },
+    {
+      "count": 1,
+      "current": 0,
+      "max": 273,
+      "min": 273,
+      "occurrences": 0,
+      "standardDeviation": 0,
+      "startTimeInMillis": 1435686480000,
+      "sum": 273,
+      "useRange": true,
+      "value": 273
+    },
+    {
+      "count": 1,
+      "current": 0,
+      "max": 470,
+      "min": 470,
+      "occurrences": 0,
+      "standardDeviation": 0,
+      "startTimeInMillis": 1435686540000,
+      "sum": 470,
+      "useRange": true,
+      "value": 470
+    }
+  ]
+}]

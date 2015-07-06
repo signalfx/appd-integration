@@ -1,0 +1,9 @@
+# IntelliJ
+*.iml
+.idea
+
+# Maven build directory/artifacts
+target
+
+#config
+metrics.json
