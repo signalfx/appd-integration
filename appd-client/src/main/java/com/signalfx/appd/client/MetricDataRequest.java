@@ -1,3 +1,6 @@
+/**
+ * Copyright (C) 2015 SignalFx, Inc.
+ */
 package com.signalfx.appd.client;
 
 import java.util.HashMap;
@@ -18,14 +21,41 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+/**
+ * MetricDataRequest perform request to AppDynamics REST API to retrieve metrics data.
+ *
+ * The API as documented here: {@link https://docs.appdynamics.com/display/PRO40/Use+the+AppDynamics+REST+API}
+ */
 public class MetricDataRequest {
 
+    /**
+     * AppDynamics host URL
+     */
     private final String appdURL;
+
+    /**
+     * AppDynamics username
+     */
     private final String appdUsername;
+
+    /**
+     * AppDynamics password
+     */
     private final String appdPassword;
 
+    /**
+     * AppDynamics application name
+     */
     private String appName;
+
+    /**
+     * Time parameters to query the data.
+     */
     private TimeParams timeParams;
+
+    /**
+     * AppDynamics metric path as query parameter
+     */
     private String metricPath;
 
     public MetricDataRequest(String url, String username, String password) {
@@ -46,7 +76,12 @@ public class MetricDataRequest {
         this.metricPath = metricPath;
     }
 
-
+    /**
+     * Perform retrieval of metrics from AppDynamics using specified parameters.
+     * @return list of metric data.
+     * @throws RequestException when there was an error with request.
+     * @throws UnauthorizedException when unable to authorize with given credentials.
+     */
     public List<MetricData> get() throws RequestException, UnauthorizedException {
         HttpResponse<String> response;
         try {
@@ -76,6 +111,10 @@ public class MetricDataRequest {
         }
     }
 
+    /**
+     * Generate querystring for the request.
+     * @return map of query strings.
+     */
     protected Map<String, Object> getQueryString() {
         Map<String, Object> qs = new HashMap<>();
         if (timeParams != null) {
@@ -97,6 +136,11 @@ public class MetricDataRequest {
         return qs;
     }
 
+    /**
+     * Process the JSON result from the request.
+     * @param node root node of JSON response.
+     * @return list of {@link MetricData}
+     */
     protected List<MetricData> process(JsonNode node) {
         JSONArray dataArray = node.getArray();
         List<MetricData> list = new LinkedList<>();
@@ -118,24 +162,47 @@ public class MetricDataRequest {
         return list;
     }
 
+    /**
+     * TimeParams represents time parameters in querystring.
+     */
     public static class TimeParams {
         private final String type;
         private final long duration;
         private final long startTime;
         private final long endTime;
 
+        /**
+         * @param duration minutes before current time.
+         * @return
+         */
         public static TimeParams beforeNow(long duration) {
             return new TimeParams("BEFORE_NOW", duration, 0, 0);
         }
 
+        /**
+         *
+         * @param duration minutes before endTime.
+         * @param endTime in milliseconds UNIX epoch time which metric data is returned until.
+         * @return
+         */
         public static TimeParams beforeTime(long duration, long endTime) {
             return new TimeParams("BEFORE_TIME", duration, 0, endTime);
         }
 
+        /**
+         * @param duration minutes after startTime.
+         * @param startTime in milliseconds UNIX epoch time which metric data starts.
+         * @return
+         */
         public static TimeParams afterTime(long duration, long startTime) {
             return new TimeParams("AFTER_TIME", duration, startTime, 0);
         }
 
+        /**
+         * @param startTime in milliseconds UNIX epoch time which metric data starts.
+         * @param endTime in milliseconds UNIX epoch time which metric data is returned until.
+         * @return
+         */
         public static TimeParams betweenTime(long startTime, long endTime) {
             return new TimeParams("BETWEEN_TIMES", 0, startTime, endTime);
         }

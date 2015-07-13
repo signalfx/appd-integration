@@ -1,3 +1,6 @@
+/**
+ * Copyright (C) 2015 SignalFx, Inc.
+ */
 package com.signalfx.appd.client;
 
 import static org.junit.Assert.assertEquals;
