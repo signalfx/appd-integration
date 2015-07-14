@@ -58,7 +58,8 @@ public class MetricDataRequestTest {
         assertEquals(1, metricDataList.size());
 
         MetricData metricData = metricDataList.get(0);
-        assertEquals("End User Experience|Device|Computer|AJAX Requests per Minute", metricData.metricPath);
+        assertEquals("End User Experience|Device|Computer|AJAX Requests per Minute",
+                metricData.metricPath);
         assertEquals(4, metricData.metricValues.size());
 
         MetricValue metricValue = metricData.metricValues.get(0);
@@ -104,7 +105,8 @@ public class MetricDataRequestTest {
 
     private MetricDataRequest getMetricDataRequest() {
         final int port = server.getConnectors()[0].getLocalPort();
-        MetricDataRequest metricDataRequest = new MetricDataRequest("http://localhost:" + port, "user", "pass");
+        MetricDataRequest metricDataRequest = new MetricDataRequest("http://localhost:" + port,
+                "user", "pass");
         metricDataRequest.setAppName("Any");
         metricDataRequest.setMetricPath("DontCare");
         metricDataRequest.setTimeParams(MetricDataRequest.TimeParams.beforeNow(2));
@@ -136,7 +138,8 @@ public class MetricDataRequestTest {
                 throws IOException, ServletException {
             String responseString =
                     IOUtils.toString(
-                            getClass().getResourceAsStream(String.format("/metric_response_%d.json", status)));
+                            getClass().getResourceAsStream(
+                                    String.format("/metric_response_%d.json", status)));
             response.setStatus(status);
             response.getWriter().write(responseString);
             baseRequest.setHandled(true);

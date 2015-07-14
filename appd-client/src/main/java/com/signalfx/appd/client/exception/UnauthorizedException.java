@@ -4,7 +4,7 @@
 package com.signalfx.appd.client.exception;
 
 /**
- * UnauthorizedException is thrown when request cannot be authorized.
+ * Thrown when request cannot be authorized.
  */
 public class UnauthorizedException extends Exception {
 

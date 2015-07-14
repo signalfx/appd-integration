@@ -4,7 +4,7 @@
 package com.signalfx.appd.client.exception;
 
 /**
- * RequestException when generic error occurs.
+ * Thrown when generic error occurs.
  */
 public class RequestException extends Exception {
 

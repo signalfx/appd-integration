@@ -22,9 +22,9 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 /**
- * MetricDataRequest perform request to AppDynamics REST API to retrieve metrics data.
+ * MetricDataRequest performs request to AppDynamics REST API to retrieve metrics data.
  *
- * The API as documented here: {@link https://docs.appdynamics.com/display/PRO40/Use+the+AppDynamics+REST+API}
+ * AppDynamics API is documented <a href="https://docs.appdynamics.com/display/PRO40/Use+the+AppDynamics+REST+API">here</a>.
  */
 public class MetricDataRequest {
 
@@ -78,9 +78,12 @@ public class MetricDataRequest {
 
     /**
      * Perform retrieval of metrics from AppDynamics using specified parameters.
+     *
      * @return list of metric data.
-     * @throws RequestException when there was an error with request.
-     * @throws UnauthorizedException when unable to authorize with given credentials.
+     * @throws RequestException
+     *         when there was an error with request.
+     * @throws UnauthorizedException
+     *         when unable to authorize with given credentials.
      */
     public List<MetricData> get() throws RequestException, UnauthorizedException {
         HttpResponse<String> response;
@@ -99,20 +102,21 @@ public class MetricDataRequest {
             throw new RequestException("Response is empty.");
         }
         switch (response.getStatus()) {
-            case 200: {
-                return process(new JsonNode(response.getBody()));
-            }
-            case 401: {
-                throw new UnauthorizedException("Authentication failed");
-            }
-            default: {
-                throw new RequestException("Unhandled response code " + response.getStatus());
-            }
+        case 200: {
+            return process(new JsonNode(response.getBody()));
+        }
+        case 401: {
+            throw new UnauthorizedException("Authentication failed");
+        }
+        default: {
+            throw new RequestException("Unhandled response code " + response.getStatus());
+        }
         }
     }
 
     /**
      * Generate querystring for the request.
+     *
      * @return map of query strings.
      */
     protected Map<String, Object> getQueryString() {
@@ -137,8 +141,10 @@ public class MetricDataRequest {
     }
 
     /**
-     * Process the JSON result from the request.
-     * @param node root node of JSON response.
+     * Process the JSON response from the request.
+     *
+     * @param node
+     *         root node of JSON response.
      * @return list of {@link MetricData}
      */
     protected List<MetricData> process(JsonNode node) {
@@ -148,10 +154,10 @@ public class MetricDataRequest {
             JSONObject data = dataArray.getJSONObject(i);
             MetricData metricData =
                     new MetricData(data.getString("frequency"), data.getLong("metricId"),
-                        data.getString("metricName"), data.getString("metricPath"));
+                            data.getString("metricName"), data.getString("metricPath"));
             list.add(metricData);
             JSONArray valueArray = data.getJSONArray("metricValues");
-            for (int j = 0; j< valueArray.length(); j++) {
+            for (int j = 0; j < valueArray.length(); j++) {
                 JSONObject value = valueArray.getJSONObject(j);
                 metricData.metricValues.add(
                         new MetricValue(value.getLong("count"), value.getLong("value"),
@@ -163,7 +169,7 @@ public class MetricDataRequest {
     }
 
     /**
-     * TimeParams represents time parameters in querystring.
+     * TimeParams represent time parameters in querystring.
      */
     public static class TimeParams {
         private final String type;
@@ -172,36 +178,46 @@ public class MetricDataRequest {
         private final long endTime;
 
         /**
-         * @param duration minutes before current time.
-         * @return
+         * @param duration
+         *         duration (in minutes) to return the metric data.
+         * @return {@link com.signalfx.appd.client.MetricDataRequest.TimeParams}
          */
         public static TimeParams beforeNow(long duration) {
             return new TimeParams("BEFORE_NOW", duration, 0, 0);
         }
 
         /**
-         *
-         * @param duration minutes before endTime.
-         * @param endTime in milliseconds UNIX epoch time which metric data is returned until.
-         * @return
+         * @param duration
+         *         duration (in minutes) to return the metric data.
+         * @param endTime
+         *         end time (in milliseconds) until which the metric data is returned in UNIX epoch
+         *         time.
+         * @return {@link com.signalfx.appd.client.MetricDataRequest.TimeParams}
          */
         public static TimeParams beforeTime(long duration, long endTime) {
             return new TimeParams("BEFORE_TIME", duration, 0, endTime);
         }
 
         /**
-         * @param duration minutes after startTime.
-         * @param startTime in milliseconds UNIX epoch time which metric data starts.
-         * @return
+         * @param duration
+         *         duration (in minutes) to return the metric data.
+         * @param startTime
+         *         start time (in milliseconds) from which the metric data is returned in UNIX epoch
+         *         time.
+         * @return {@link com.signalfx.appd.client.MetricDataRequest.TimeParams}
          */
         public static TimeParams afterTime(long duration, long startTime) {
             return new TimeParams("AFTER_TIME", duration, startTime, 0);
         }
 
         /**
-         * @param startTime in milliseconds UNIX epoch time which metric data starts.
-         * @param endTime in milliseconds UNIX epoch time which metric data is returned until.
-         * @return
+         * @param startTime
+         *         start time (in milliseconds) from which the metric data is returned in UNIX epoch
+         *         time.
+         * @param endTime
+         *         end time (in milliseconds) until which the metric data is returned in UNIX epoch
+         *         time.
+         * @return {@link com.signalfx.appd.client.MetricDataRequest.TimeParams}
          */
         public static TimeParams betweenTime(long startTime, long endTime) {
             return new TimeParams("BETWEEN_TIMES", 0, startTime, endTime);
