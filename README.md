@@ -101,7 +101,7 @@ Default metrics.json is provided with Application Infrastructure Performance met
 
 ### Process Status Metrics
 
-appd-report-standalone also reports metrics pertain to the syncing process to SignalFx.
+appd-report-standalone also reports metrics pertaining to the syncing process to SignalFx.
 
 That includes:
 - mtsReported
