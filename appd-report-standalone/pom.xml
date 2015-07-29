@@ -9,12 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>appd-client</artifactId>
-    <name>AppDynamics Client</name>
+    <artifactId>appd-report-standalone</artifactId>
+    <name>SignalFx AppDynamics Standalone Agent</name>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <description>
-        AppDynamics Client.
+        SignalFx AppDynamics Standalone Agent.
     </description>
 
     <properties>
@@ -40,27 +40,39 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
+            <groupId>sf</groupId>
+            <artifactId>appd-process</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-server</artifactId>
-            <version>8.1.14.v20131031</version>
-            <scope>test</scope>
+            <groupId>com.signalfx.public</groupId>
+            <artifactId>signalfx-java</artifactId>
+            <version>0.0.20</version>
         </dependency>
         <dependency>
-            <groupId>com.mashape.unirest</groupId>
-            <artifactId>unirest-java</artifactId>
-            <version>1.4.5</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.5</version>
         </dependency>
         <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.4</version>
-            <scope>test</scope>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.signalfx.public</groupId>
+            <artifactId>signalfx-codahale</artifactId>
+            <version>0.0.20</version>
         </dependency>
     </dependencies>
 
@@ -73,6 +85,13 @@
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.signalfx.appd.report.StandAloneApp</mainClass>
                 </configuration>
             </plugin>
         </plugins>

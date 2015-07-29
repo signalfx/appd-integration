@@ -4,12 +4,56 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>sf</groupId>
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
+    <groupId>com.signalfx.public</groupId>
     <artifactId>appd-integration</artifactId>
+    <name>SignalFx AppDynamics Integrations</name>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <description>
+        SignalFx AppDynamics Integrations.
+    </description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <url>http://www.signalfx.com</url>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git@github.com:signalfx/appd-integration.git</connection>
+        <developerConnection>scm:git:git@github.com:signalfx/appd-integration.git
+        </developerConnection>
+        <url>git@github.com:signalfx/appd-integration.git</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>9park</id>
+            <name>Park Kittipatkul</name>
+            <email>park@signalfx.com</email>
+            <organization>SignalFx</organization>
+            <organizationUrl>http://www.signalfx.com</organizationUrl>
+        </developer>
+    </developers>
+
     <modules>
         <module>appd-client</module>
+        <module>appd-process</module>
+        <module>appd-report-standalone</module>
     </modules>
 
 </project>

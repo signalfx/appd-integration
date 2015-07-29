@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Sample",
+    "metrics": [
+      {
+        "metric_path": "Application Infrastructure Performance|Tier2|Individual Nodes|*|Hardware Resources|*|*",
+        "dimensions_path_map": "metric_type|tier|-|node|resource_type|component_type",
+        "dimensions": {
+          "metric_source": "AppDynamics"
+        }
+      },
+      {
+        "metric_path": "Application Infrastructure Performance|Tier2|Individual Nodes|*|Hardware Resources|*|*|*",
+        "dimensions_path_map": "metric_type|tier|-|node|resource_type|component_type|component_instance",
+        "dimensions": {
+          "metric_source": "AppDynamics"
+        }
+      },
+      {
+        "metric_path": "Application Infrastructure Performance|Tier2|Individual Nodes|*|Agent|*|*",
+        "dimensions_path_map": "metric_type|tier|-|node|-|category",
+        "dimensions": {
+          "metric_source": "AppDynamics"
+        }
+      }
+    ]
+  }
+]
