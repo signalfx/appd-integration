@@ -11,7 +11,7 @@
 
     <artifactId>appd-process</artifactId>
     <name>SignalFx AppDynamics Processor</name>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <description>
         SignalFx AppDynamics metric processor.
@@ -45,11 +45,6 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.signalfx.public</groupId>
-            <artifactId>signalfx-java</artifactId>
-            <version>0.0.20</version>
-        </dependency>
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.5</version>
@@ -75,6 +70,26 @@
             <version>2.5.1</version>
         </dependency>
         <dependency>
+            <groupId>com.codahale.metrics</groupId>
+            <artifactId>metrics-core</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>18.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.signalfx.public</groupId>
+            <artifactId>signalfx-protoc</artifactId>
+            <version>0.0.20</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
@@ -85,11 +100,6 @@
             <artifactId>mockito-all</artifactId>
             <version>1.8.4</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.codahale.metrics</groupId>
-            <artifactId>metrics-core</artifactId>
-            <version>3.0.2</version>
         </dependency>
     </dependencies>
 

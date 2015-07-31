@@ -11,7 +11,7 @@
 
     <artifactId>appd-report-standalone</artifactId>
     <name>SignalFx AppDynamics Standalone Agent</name>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <description>
         SignalFx AppDynamics Standalone Agent.
@@ -60,11 +60,6 @@
             <version>3.0</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.5</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.2</version>
@@ -73,6 +68,21 @@
             <groupId>com.signalfx.public</groupId>
             <artifactId>signalfx-codahale</artifactId>
             <version>0.0.20</version>
+        </dependency>
+        <dependency>
+            <groupId>com.codahale.metrics</groupId>
+            <artifactId>metrics-core</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.signalfx.public</groupId>
+            <artifactId>signalfx-protoc</artifactId>
+            <version>0.0.20</version>
+        </dependency>
+        <dependency>
+            <groupId>com.signalfx.public</groupId>
+            <artifactId>appd-client</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
