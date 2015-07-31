@@ -43,26 +43,57 @@ APPD_INTERVAL=<time in minutes of metric lookup interval (default to 1 minute)>
 Metrics.json contains configurations for list of apps, metrics inside each app and
 its dimensions mapping.
 
-AppDynamics metric path is described as pipe(|) separated token
-e.g. Performance|AppServer1|Resources|CPU.
+AppDynamics metric paths are described as a pipe-delimited string (|),
+for example Performance|AppServer1|Resources|CPU.
 
-The given metrics is reported to SignalFx with last the last token being metric name and the rest
-of the token mapped to dimensions with dimensionsPathMap.
+Each metric is reported to SignalFx with the last element of this path as the metric name,
+and each previous element mapped to a dimension according to the dimensionsPathMap.
 
-Certain token can be ignored by specifying - (dash) in dimensions path map.
+Elements can be ignored by specifying the target dimension as - (dash) in the dimensionsPathMap.
 
-e.g. MetricPath = Performance|AppServer1|Resources|CPU
-     DimensionsPathMap = category|host|-|resource_type
+Wild cards (asterisk *) can be used to specify that all matching AppDynamics metrics are
+to be collected. Mapping to dimensions through the dimensionsPathMap will still happen on
+the actual value of that metric path element.
 
-     would be mapped to
-     {
-        metric_name : "CPU"
-        dimensions {
-             category: "Performance",
-             host: "AppServer1",
-             resource_type: "CPU"
-         }
-      }
+Example with ignoring element:
+
+```
+MetricPath = Performance|AppServer1|Resources|CPU
+DimensionsPathMap = category|host|-
+
+would be mapped to
+{
+    metric_name : "CPU"
+    dimensions {
+        category: "Performance",
+        host: "AppServer1"
+    }
+}
+```
+
+Example with wildcard:
+```
+MetricPath = Performance|*|Resources|CPU
+DimensionsPathMap = category|host|-
+
+If the entity at the second level matches both 'Server1' and 'Server2'. We would get 2 metric
+time series as
+{
+    metric_name : "CPU"
+    dimensions {
+        category: "Performance",
+        host: "Server1"
+    }
+},
+{
+    metric_name : "CPU"
+    dimensions {
+        category: "Performance",
+        host: "Server2"
+    }
+}
+```
+
       
 Optional extra dimensions can also be specified for each metric paths.
 

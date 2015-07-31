@@ -16,29 +16,29 @@ import com.signalfx.appd.process.model.MetricTimeSeries;
  * MetricInfo contains information about each metric mapping from AppDynamics metric path to
  * SignalFx metric name and dimensions.
  *
- * AppDynamics metric path is described as pipe(|) separated token
- * e.g. Performance|AppServer1|Resources|CPU.
+ * AppDynamics metric paths are described as a pipe-delimited string (|),
+ * for example Performance|AppServer1|Resources|CPU.
  *
- * The given metrics is reported to SignalFx with last the last token being metric name and the rest
- * of the token mapped to dimensions with dimensionsPathMap.
+ * Each metric is reported to SignalFx with the last element of this path as the metric name,
+ * and each previous element mapped to a dimension according to the dimensionsPathMap.
  *
- * Certain token can be ignored by specifying - (dash) in dimensions path map.
+ * Elements can be ignored by specifying the target dimension as - (dash) in the dimensionsPathMap.
  *
  * e.g. MetricPath = Performance|AppServer1|Resources|CPU
- *      DimensionsPathMap = category|host|-|resource_type
+ *      DimensionsPathMap = category|host|-
  *
  *      would be mapped to
  *      {
  *         metric_name : "CPU"
  *         dimensions {
  *              category: "Performance",
- *              host: "AppServer1",
- *              resource_type: "CPU"
+ *              host: "AppServer1"
  *          }
  *       }
  *
- * Since wild card (*) could be specified in metric path query e.g. A|*|B, dimensions mapping
- * is done with actual metric path instead of query.
+ * Wild cards (asterisk *) can be used to specify that all matching AppDynamics metrics are
+ * to be collected. Mapping to dimensions through the dimensionsPathMap will still happen on
+ * the actual value of that metric path element.
  *
  * Extra dimensions could also be added to metric data with extra {@link Map}
  *
