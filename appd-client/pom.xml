@@ -5,14 +5,14 @@
     <parent>
         <artifactId>appd-integration</artifactId>
         <groupId>com.signalfx.public</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>appd-client</artifactId>
     <name>AppDynamics Client</name>
     <packaging>jar</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <description>
         AppDynamics Client.
     </description>
