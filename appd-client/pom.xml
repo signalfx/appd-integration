@@ -11,7 +11,7 @@
 
     <artifactId>appd-client</artifactId>
     <name>AppDynamics Client</name>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <description>
         AppDynamics Client.
@@ -55,6 +55,17 @@
             <groupId>com.mashape.unirest</groupId>
             <artifactId>unirest-java</artifactId>
             <version>1.4.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20140107</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.orbit</groupId>
+            <artifactId>javax.servlet</artifactId>
+            <version>3.0.0.v201112011016</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>

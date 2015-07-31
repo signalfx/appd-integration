@@ -1,4 +1,4 @@
-# SignalFx AppDynamics client agent
+# SignalFx AppDynamics client agent [![Build Status](https://travis-ci.org/signalfx/appd-integration.svg)](https://travis-ci.org/signalfx/appd-integration)
 
 This repository contains agent and libraries for retrieving and reporting AppDynamics metrics
 to SignalFx. You will need AppDynamics username/password and host information as well as 
