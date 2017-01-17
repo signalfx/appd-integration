@@ -27,6 +27,15 @@ $ mvn exec:java -Dcom.signalfx.appd.username=<AppDynamics Username> -Dcom.signal
 
 ### Configurations
 
+| Environmental Variable | System Property            | Required | Description                                                     |
+|------------------------|----------------------------|----------|-----------------------------------------------------------------|
+| APPD_USERNAME          | com.signalfx.appd.username | ✓        | AppDynamics Username                                            |
+| APPD_PASSWORD          | com.signalfx.appd.password | ✓        | AppDynamics Password                                            |
+| APPD_HOST              | com.signalfx.appd.host     | ✓        | AppDynamics Host                                                |
+| SIGNALFX_TOKEN         | com.signalfx.api.token     | ✓        | SignalFx API Token                                              |
+| SIGNALFX_APPD_METRICS  | com.signalfx.appd.metrics  |          | Metric configurations filename (default to metrics.json)        |
+| APPD_INTERVAL          | com.signalfx.appd.interval |          | Time in minutes of metric lookup interval (default to 1 minute) |
+
 #### Required Variables
 
 ##### Environmental Variables
