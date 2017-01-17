@@ -19,9 +19,13 @@ $ git clone https://github.com/signalfx/appd-integration
 $ cd appd-integration
 $ mvn install
 $ cd appd-report-standalone
-# If using environmental variables:
+```
+If using environmental variables:
+```
 $ mvn exec:java
-# If using system properties:
+```
+If using system properties:
+```
 $ mvn exec:java -Dcom.signalfx.appd.username=<AppDynamics Username> -Dcom.signalfx.appd.password=<AppDynamics Password> -Dcom.signalfx.appd.host=<https://AppDynamics Host> -Dcom.signalfx.api.token=<SignalFx token>
 ```
 
