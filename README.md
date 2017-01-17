@@ -15,28 +15,33 @@ AppDynamics metric every specified intervals.
 
 To run
 ```
-maven install
-cd appd-report-standalone
-maven exec:java
+$ git clone https://github.com/signalfx/appd-integration
+$ cd appd-integration
+$ mvn install
+$ cd appd-report-standalone
+```
+Then, if using environmental variables:
+```
+$ mvn exec:java
+```
+Othewrise, if using system properties:
+```
+$ mvn exec:java -Dcom.signalfx.appd.username=<AppDynamics Username> -Dcom.signalfx.appd.password=<AppDynamics Password> -Dcom.signalfx.appd.host=<https://AppDynamics Host> -Dcom.signalfx.api.token=<SignalFx API Token>
 ```
 
 ### Configurations
 
-#### Environment Variables
+#### Configuration Variables
 
-Required
-```
-APPD_USERNAME=<AppDynamics Username>
-APPD_PASSWORD=<AppDynamics Password>
-APPD_HOST=<https://AppDynamics Host>
-SIGNALFX_TOKEN=<SignalFx token>
-```
+| Environmental Variable | System Property            | Required | Description                                                     |
+|------------------------|----------------------------|----------|-----------------------------------------------------------------|
+| APPD_USERNAME          | com.signalfx.appd.username | &#x2713;        | AppDynamics Username                                            |
+| APPD_PASSWORD          | com.signalfx.appd.password | &#x2713;        | AppDynamics Password                                            |
+| APPD_HOST              | com.signalfx.appd.host     | &#x2713;        | AppDynamics Host                                                |
+| SIGNALFX_TOKEN         | com.signalfx.api.token     | &#x2713;        | SignalFx API Token                                              |
+| SIGNALFX_APPD_METRICS  | com.signalfx.appd.metrics  |          | Metric configurations filename (default to metrics.json)        |
+| APPD_INTERVAL          | com.signalfx.appd.interval |          | Time in minutes of metric lookup interval (default to 1 minute) |
 
-Optional
-```
-SIGNALFX_APPD_METRICS=<metric configurations filename (default to metrics.json)>
-APPD_INTERVAL=<time in minutes of metric lookup interval (default to 1 minute)>
-```
 
 #### Metrics.json
 
