@@ -27,46 +27,17 @@ $ mvn exec:java -Dcom.signalfx.appd.username=<AppDynamics Username> -Dcom.signal
 
 ### Configurations
 
+#### Configuration Variables
+
 | Environmental Variable | System Property            | Required | Description                                                     |
 |------------------------|----------------------------|----------|-----------------------------------------------------------------|
-| APPD_USERNAME          | com.signalfx.appd.username | ✓        | AppDynamics Username                                            |
-| APPD_PASSWORD          | com.signalfx.appd.password | ✓        | AppDynamics Password                                            |
-| APPD_HOST              | com.signalfx.appd.host     | ✓        | AppDynamics Host                                                |
-| SIGNALFX_TOKEN         | com.signalfx.api.token     | ✓        | SignalFx API Token                                              |
+| APPD_USERNAME          | com.signalfx.appd.username | &#x2713;        | AppDynamics Username                                            |
+| APPD_PASSWORD          | com.signalfx.appd.password | &#x2713;        | AppDynamics Password                                            |
+| APPD_HOST              | com.signalfx.appd.host     | &#x2713;        | AppDynamics Host                                                |
+| SIGNALFX_TOKEN         | com.signalfx.api.token     | &#x2713;        | SignalFx API Token                                              |
 | SIGNALFX_APPD_METRICS  | com.signalfx.appd.metrics  |          | Metric configurations filename (default to metrics.json)        |
 | APPD_INTERVAL          | com.signalfx.appd.interval |          | Time in minutes of metric lookup interval (default to 1 minute) |
 
-#### Required Variables
-
-##### Environmental Variables
-```
-APPD_USERNAME=<AppDynamics Username>
-APPD_PASSWORD=<AppDynamics Password>
-APPD_HOST=<https://AppDynamics Host>
-SIGNALFX_TOKEN=<SignalFx token>
-```
-
-##### System Properties
-```
-com.signalfx.appd.username=<AppDynamics Username>
-com.signalfx.appd.password=<AppDynamics Password>
-com.signalfx.appd.host=<https://AppDynamics Host>
-com.signalfx.api.token=<SignalFx token>
-```
-
-#### Optional Variables
-
-##### Environmental Variables
-```
-SIGNALFX_APPD_METRICS=<Metric configurations filename (default to metrics.json)>
-APPD_INTERVAL=<Time in minutes of metric lookup interval (default to 1 minute)>
-```
-
-##### System Properties
-```
-com.signalfx.appd.metrics=<Metric configurations filename (default to metrics.json)>
-com.signalfx.appd.interval=<Time in minutes of metric lookup interval (default to 1 minute)>
-```
 
 #### Metrics.json
 
