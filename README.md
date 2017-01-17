@@ -15,16 +15,21 @@ AppDynamics metric every specified intervals.
 
 To run
 ```
-maven install
-cd appd-report-standalone
-maven exec:java
+$ git clone https://github.com/signalfx/appd-integration
+$ cd appd-integration
+$ mvn install
+$ cd appd-report-standalone
+# If using environmental variables:
+$ mvn exec:java
+# If using system properties:
+$ mvn exec:java -Dcom.signalfx.appd.username=<AppDynamics Username> -Dcom.signalfx.appd.password=<AppDynamics Password> -Dcom.signalfx.appd.host=<https://AppDynamics Host> -Dcom.signalfx.api.token=<SignalFx token>
 ```
 
 ### Configurations
 
-#### Environment Variables
+#### Required Variables
 
-Required
+##### Environmental Variables
 ```
 APPD_USERNAME=<AppDynamics Username>
 APPD_PASSWORD=<AppDynamics Password>
@@ -32,10 +37,26 @@ APPD_HOST=<https://AppDynamics Host>
 SIGNALFX_TOKEN=<SignalFx token>
 ```
 
-Optional
+##### System Properties
 ```
-SIGNALFX_APPD_METRICS=<metric configurations filename (default to metrics.json)>
-APPD_INTERVAL=<time in minutes of metric lookup interval (default to 1 minute)>
+com.signalfx.appd.username=<AppDynamics Username>
+com.signalfx.appd.password=<AppDynamics Password>
+com.signalfx.appd.host=<https://AppDynamics Host>
+com.signalfx.api.token=<SignalFx token>
+```
+
+#### Optional Variables
+
+##### Environmental Variables
+```
+SIGNALFX_APPD_METRICS=<Metric configurations filename (default to metrics.json)>
+APPD_INTERVAL=<Time in minutes of metric lookup interval (default to 1 minute)>
+```
+
+##### System Properties
+```
+com.signalfx.appd.metrics=<Metric configurations filename (default to metrics.json)>
+com.signalfx.appd.interval=<Time in minutes of metric lookup interval (default to 1 minute)>
 ```
 
 #### Metrics.json
