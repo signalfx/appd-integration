@@ -11,9 +11,12 @@ SignalFx account and organization API token to report the data.
 ## Sending metrics
 
 appd-report-standalone module is a standalone process that parses configurations and report
-AppDynamics metric every specified intervals.
+AppDynamics metric every specified intervals. If your environment utilizes a HTTP/HTTPS
+proxy then Maven needs to be configured to use it otherwise dependancies may fail to
+install. Please click [https://maven.apache.org/guides/mini/guide-proxies.html](here) to
+go to the Maven mini-guide for configuring a proxy.
 
-To run
+To run:
 ```
 $ git clone https://github.com/signalfx/appd-integration
 $ cd appd-integration
