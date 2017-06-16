@@ -13,7 +13,7 @@ SignalFx account and organization API token to report the data.
 appd-report-standalone module is a standalone process that parses configurations and report
 AppDynamics metric every specified intervals. If your environment utilizes a HTTP/HTTPS
 proxy then Maven needs to be configured to use it otherwise dependancies may fail to
-install. Please click [https://maven.apache.org/guides/mini/guide-proxies.html](here) to
+install. Please click [https://maven.apache.org/guides/mini/guide-proxies.html](https://maven.apache.org/guides/mini/guide-proxies.html) to
 go to the Maven mini-guide for configuring a proxy.
 
 To run:
